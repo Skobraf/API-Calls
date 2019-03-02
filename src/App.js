@@ -7,16 +7,23 @@ class App extends Component {
   state = {
     error:null,
     isLoaded: false,
-    items:[]
+    items:[],
+    count:1,
+    visible: 2
   }
   apiCall = () => {
-       fetch('https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc')
+      const jsonCall = `https://api.github.com/search/repositories?q=created:>2018-02-01&sort=stars&order=desc&page=${this.state.count}`
+       fetch(jsonCall)
         .then(res => res.json())
         .then(
           (result) => {
+             let sortedArray = result.items.sort((a, b) => {
+              return b.stargazers_count - a.stargazers_count;
+                    })
+
             this.setState({
               isLoaded: true,
-              items: result.items
+              items: sortedArray
             });
           },
           // Note: it's important to handle errors here
@@ -29,15 +36,30 @@ class App extends Component {
             });
           }
         );
-        console.log(result.items)
     }
+  loadMore = () => {
+      this.setState((prev) => {
+      return {visible: prev.visible + 4};
+    });
+ }
 
   render() {
     return (
+      <section>
      <div>
-        <GitRepo />
-        <button onClick={this.apiCall}>add</button>
+        {this.state.items.slice(0, this.state.visible).map((item, index) => {
+          return(
+            <div key={index}>
+              <h1>{index}</h1>
+            </div>
+            )
+        })}
      </div>
+     {this.state.visible < this.state.items.length && 
+        <button onClick={this.loadMore} type='button'>Load more</button>
+     }
+     <button onClick={this.apiCall} >add</button>
+     </section>
     );
   }
 }
