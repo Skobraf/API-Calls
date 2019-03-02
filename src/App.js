@@ -11,8 +11,8 @@ class App extends Component {
     count:1,
     visible: 2
   }
-  apiCall = () => {
-      const jsonCall = `https://api.github.com/search/repositories?q=created:>2018-02-01&sort=stars&order=desc&page=${this.state.count}`
+  apiCall = (p) => {
+      const jsonCall = `https://api.github.com/search/repositories?q=created:>2018-02-01&sort=stars&order=desc&page=${p}`
        fetch(jsonCall)
         .then(res => res.json())
         .then(
@@ -41,8 +41,17 @@ class App extends Component {
       this.setState((prev) => {
       return {visible: prev.visible + 4};
     });
+      if(this.state.visible === this.state.items.length - 4) {
+        this.setState({
+          count:this.state.count + 1
+        });
+        this.apiCall(this.state.count);
+      }
+      
  }
-
+  componentDidMount() {
+      this.apiCall(this.state.count);
+    }
   render() {
     return (
       <section>
@@ -58,7 +67,6 @@ class App extends Component {
      {this.state.visible < this.state.items.length && 
         <button onClick={this.loadMore} type='button'>Load more</button>
      }
-     <button onClick={this.apiCall} >add</button>
      </section>
     );
   }
