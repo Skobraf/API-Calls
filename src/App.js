@@ -12,7 +12,7 @@ class App extends Component {
     visible: 2
   }
   apiCall = (p) => {
-      const jsonCall = `https://api.github.com/search/repositories?q=created:>2018-02-01&sort=stars&order=desc&page=${p}`
+      const jsonCall = `https://api.github.com/search/repositories?q=created:>2019-02-01&sort=stars&order=desc&per_page=100&page=${p}`
        fetch(jsonCall)
         .then(res => res.json())
         .then(
