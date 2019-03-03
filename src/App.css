@@ -1,0 +1,29 @@
+* {
+     font-family: Arial, Helvetica, sans-serif
+}
+section {
+	max-width: 800px;
+    margin: 0 auto;
+	border-radius: 7px;
+    border-color: #bfbcbc47;
+    border-width: 2px;
+    border-style: solid;
+}
+
+img {
+	    margin: 42px 12px
+}
+ul {
+	list-style-type:none;
+}
+li div {
+	    padding-right: 18px;
+}
+
+span {
+	padding: 3px 5px;
+    border-radius: 2px;
+    border-color: #4b4a4a;
+    border-width: 1px;
+    border-style: solid
+}
