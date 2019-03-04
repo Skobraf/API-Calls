@@ -33,26 +33,22 @@ constructor(props) {
   }
 
   loadUsers = () => {
-    let p = this.state.count;
-    let jsonCall = `https://api.github.com/search/repositories?q=created:>2019-02-01&sort=stars&order=desc&per_page=20&page=${p}`;
+    let page = this.state.count;
+    let jsonCall = `https://api.github.com/search/repositories?q=created:>2019-02-01&sort=stars&order=desc&per_page=100&page=${page}`;
     fetch(jsonCall)
       .then(res => res.json())
       .then(
         result => {
-          const getItems = result.items.map(user => {
-            return {
-              name: user.name,
-              avatar: user.owner.avatar_url,
-              description: user.description,
-              numbIssues: user.open_issues_count,
-              numbStars: user.stargazers_count,
-              authorName: user.owner.login,
-              timeInterval: user.created_at
-            };
-          });
-          let nextUsers = getItems.sort((a, b) => {
-            return b - a;
-          });
+          const getItems = result.items.map(user => ({
+            name: user.name,
+            avatar: user.owner.avatar_url,
+            description: user.description,
+            numbIssues: user.open_issues_count,
+            numbStars: user.stargazers_count,
+            authorName: user.owner.login,
+            timeInterval: user.created_at
+          }));
+          let nextUsers = getItems.sort((a, b) => b - a);
           this.setState({
             isLoaded: true,
             items: [...this.state.items, ...nextUsers]
