@@ -10,9 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## SIMPLE NOTE
 The project was bootsTraped with Create-react-app, but for some reason it show some warnings while npm install, I Included a live demo with code based on Create-react-App.
-	*SandBox [Demo](https://codesandbox.io/s/kxzjwvkrp5).
+	* SandBox [Demo](https://codesandbox.io/s/kxzjwvkrp5).
 	* Live [Demo](https://kxzjwvkrp5.codesandbox.io/).
-##Launch project
+## Launch project
 	* npm install
 	* npm start
 	* navigate localhost:3000
