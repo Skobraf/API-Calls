@@ -1,18 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##Technologie used 
+## Technologie used 
 	* React 16.8.3
 
-##API CALL & loading data
+## API CALL & loading data
 	* used fetch to call and fetch the API.
 	* used onscroll event to track the end of the page and load more data
-	*componentDidMount to call the method that calls the API 
+	* componentDidMount to call the method that calls the API 
 
-##SIMPLE NOTE
+## SIMPLE NOTE
 The project was bootsTraped with Create-react-app, but for some reason it show some warnings while npm install, I Included a live demo with code based on Create-react-App.
 	*SandBox [Demo](https://codesandbox.io/s/kxzjwvkrp5).
-	*Live [Demo](https://kxzjwvkrp5.codesandbox.io/).
+	* Live [Demo](https://kxzjwvkrp5.codesandbox.io/).
 ##Launch project
-	*npm install
-	*npm start
-	*navigate localhost:3000
+	* npm install
+	* npm start
+	* navigate localhost:3000
