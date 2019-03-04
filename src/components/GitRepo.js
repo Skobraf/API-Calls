@@ -4,31 +4,26 @@ import { formatDate } from '../helpers'
 class GitRepo extends Component {
 
   render() {
+  	const {name, avatar, description, numbIssues, numbStars, authorName, timeInterval} = this.props.user;
     return (
-     <section style={{ display: "flex" }} >
+     <section>
          <div>
             <img
-              src={this.props.user.avatar}
-              alt={this.props.user.name}
-              style={{
-                borderRadius: "50%",
-                height: 72,
-                marginRight: 20,
-                width: 72
-              }}
+              src={avatar}
+              alt={name}
             />
             </div>
             <ul>
               <li>
-                <h1>{this.props.user.name}</h1>
+                <h1>{name}</h1>
               </li>
               <li>
-                <p>{this.props.user.description} </p>
+                <p>{description} </p>
               </li>
               <li>
-                <div style={{display:"inline-block"}} ><span>Stars: {this.props.user.numbStars}</span></div>
-                <div style={{display:"inline-block"}} ><span>Issues: {this.props.user.numbIssues}</span></div>
-                <div style={{display:"inline-block"}} ><p>Submited {formatDate(this.props.user.timeInterval)} days ago  by {this.props.user.authorName}</p></div>
+                <div style={{display:"inline-block"}} ><span>Stars: {numbStars}</span></div>
+                <div style={{display:"inline-block"}} ><span>Issues: {numbIssues}</span></div>
+                <div style={{display:"inline-block"}} ><p>Submited {formatDate(timeInterval)} days ago  by {authorName}</p></div>
               </li>
             </ul>
       </section>
