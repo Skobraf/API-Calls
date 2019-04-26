@@ -4,16 +4,15 @@ import GitRepo from "./components/GitRepo";
 import "./styles.css";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: false,
-      isLoaded: false,
-      items: [],
-      count: 1
-    };
+  state = {
+    error: null,
+    isLoaded: false,
+    items: [],
+    count: 1
+  };
 
-    // Binds  scroll event handler
+  // Binds  scroll event handler
+  handleScroll = () => {
     window.onscroll = () => {
       // Checks that the page has scrolled to the bottom
       if (
@@ -24,16 +23,20 @@ class App extends React.Component {
         this.loadUsers();
       }
     };
-    this.loadUsers();
-  }
+  };
 
   componentDidMount() {
-    //this.loadUsers();
+    this.loadUsers();
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   loadUsers = () => {
     let page = this.state.count;
-    let jsonCall = `https://api.github.com/search/repositories?q=created:>2019-02-01&sort=stars&order=desc&per_page=20&page=${page}`;
+    let jsonCall = `https://api.github.com/search/repositories?q=created:>2019-03-26&sort=stars&order=desc&per_page=20&page=${page}`;
     fetch(jsonCall)
       .then(res => res.json())
       .then(
@@ -55,7 +58,7 @@ class App extends React.Component {
         },
         error => {
           this.setState({
-            isLoaded: true,
+            isLoaded: false,
             error
           });
         }
