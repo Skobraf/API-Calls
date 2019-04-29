@@ -11,7 +11,6 @@ class App extends React.Component {
     count: 1
   };
 
-  // Binds  scroll event handler
   handleScroll = () => {
     window.onscroll = () => {
       // Checks that the page has scrolled to the bottom
@@ -56,6 +55,7 @@ class App extends React.Component {
             items: [...this.state.items, ...nextUsers]
           });
         },
+      ).catch(
         error => {
           this.setState({
             isLoaded: false,
