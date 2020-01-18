@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import GitRepo from "./components/GitRepo";
+import moment from "moment";
 import "./styles.css";
 
 const App = props => {
@@ -24,7 +25,9 @@ const App = props => {
   let loadUsers = () => {
     setIsLoaded(true);
     let page = count;
-    let jsonCall = `https://api.github.com/search/repositories?q=created:>2019-03-26&sort=stars&order=desc&per_page=20&page=${page}`;
+    const date = new moment(new Date()).subtract(1, "months");
+    const dateFormat = date.format("YYYY-MM-DD");
+    let jsonCall = `https://api.github.com/search/repositories?q=created:>${dateFormat}&sort=stars&order=desc&per_page=20&page=${page}`;
     fetch(jsonCall)
       .then(res => res.json())
       .then(result => {
@@ -37,11 +40,9 @@ const App = props => {
           authorName: user.owner.login,
           timeInterval: user.created_at
         }));
-        let nextUsers = getItems.sort((a, b) => b - a);
-        setItems(prev => [...prev, ...nextUsers]);
+        setItems(prev => [...prev, ...getItems]);
       })
       .catch(err => {
-        console.log(err);
         setIsLoaded(false);
       });
   };
